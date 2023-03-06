@@ -3,7 +3,7 @@ import { ViewProps, ViewState } from '../types/types';
 
 class UserView extends React.Component<ViewProps, ViewState> {
   render() {
-    const { name, email, message, handleChange, handleSubmit } = this.props;
+    const { name, email, message, handleChange, handleSubmit, formSent } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -37,6 +37,7 @@ class UserView extends React.Component<ViewProps, ViewState> {
           ></textarea>
         </div>
         <button type="submit">Submit</button>
+        <span>{formSent?'Formulário enviado com sucesso!':''}</span>
       </form>
     );
   }

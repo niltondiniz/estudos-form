@@ -5,7 +5,8 @@ export interface Props{
 }
 
 export interface ControllerState{
-    userModel: UserModel
+    userModel: UserModel,
+    formSent: boolean
 }
 
 export interface ViewState{
@@ -22,6 +23,7 @@ export interface ViewProps{
     message: string;
     handleChange: any; 
     handleSubmit: any;
+    formSent: boolean;
 }
 
 export interface HttpResponse{

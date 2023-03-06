@@ -7,7 +7,7 @@ import UserView from '../view/user-view';
 class UserController extends React.Component<Props, ControllerState> {
   constructor(props) {
     super(props);
-    this.state = {userModel: new UserModel()}
+    this.state = {userModel: new UserModel(), formSent: false}
   }
 
   handleChange = (event) => {
@@ -19,7 +19,12 @@ class UserController extends React.Component<Props, ControllerState> {
 
     const { userModel } = this.state;
     postUserData(userModel)
-    .then(response => console.log(response));
+    .then(response => {
+      console.log(response);
+      if(response.status == 201){
+        this.setState({userModel: userModel, formSent: true})
+      }
+    });
   }
 
   render() {
@@ -32,6 +37,7 @@ class UserController extends React.Component<Props, ControllerState> {
         message={userModel.message}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
+        formSent={this.state.formSent}
       />
     );
   }
