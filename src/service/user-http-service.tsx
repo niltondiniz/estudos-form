@@ -3,11 +3,11 @@ import { HttpResponse } from "../types/types";
 
 export async function postUserData(userModel: UserModel): Promise<HttpResponse>{
     
-    const data = userModel.toString();
+    const data = JSON.stringify(userModel);
     console.log('Dados enviados', data);
 
     try{
-        const response = await fetch('http://localhost:3002/user', {       
+        const response = await fetch('https://1f06-200-151-150-138.sa.ngrok.io/user', {       
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

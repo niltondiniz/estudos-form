@@ -6,29 +6,42 @@ import UserView from '../view/user-view';
 
 class UserController extends React.Component<Props, ControllerState> {
   constructor(props) {
-    super(props);
-    this.state = {userModel: new UserModel(), formSent: false}
+    super(props);    
+    this.state = {name: '', email: '', message: '', formSent: false}
   }
 
-  handleChange = (event) => {
+  handleChange = (event) => {    
     this.setState({ [event.target.name]: event.target.value } as Pick<ControllerState, keyof ControllerState>);
+    console.log(this.state);
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { userModel } = this.state;
+    const userModel = { 
+      name: this.state.name, 
+      email: this.state.email, 
+      message: this.state.message 
+    } as UserModel;
+    
     postUserData(userModel)
     .then(response => {
       console.log(response);
       if(response.status == 201){
-        this.setState({userModel: userModel, formSent: true})
+        this.setState({
+          name: this.state.name, 
+          email: this.state.email, 
+          message: this.state.message, 
+          formSent: true
+        });
       }
     });
   }
 
   render() {
-    const { userModel } = this.state;
+    const { name, email, message, formSent } = this.state;
+    const userModel = {name, email, message};
+
 
     return (
       <UserView
@@ -37,7 +50,7 @@ class UserController extends React.Component<Props, ControllerState> {
         message={userModel.message}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        formSent={this.state.formSent}
+        formSent={formSent}
       />
     );
   }

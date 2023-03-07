@@ -1,11 +1,11 @@
-import UserModel from "../model/user-model";
-
 export interface Props{
 
 }
 
 export interface ControllerState{
-    userModel: UserModel,
+    name: string,
+    email: string,
+    message: string,
     formSent: boolean
 }
 
